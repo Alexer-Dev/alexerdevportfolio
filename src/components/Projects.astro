@@ -1,0 +1,448 @@
+---
+const projects = [
+	{
+		titleEs: 'Duck IT Tech New',
+		titleEn: 'Duck IT Tech New',
+		descriptionEs: 'Pagina web de Noticias, tecnología y mundo de los Videojuegos',
+		descriptionEn: 'Website for news, technology, and the world of video games',
+		image: '/newstecnodemo.png',
+		tech: ['JavaScript', 'Node.js', 'Pug'],
+
+	},
+	{
+		titleEs: 'Cafetería APP',
+		titleEn: 'Coffee APP',
+		descriptionEs: 'App de cafeteria con orden de menú y método de pago',
+		descriptionEn: 'Coffee shop app with menu ordering and payment method',
+		image: '/coffeedemo.png',
+		tech: ['TypeScript', 'React', 'Tailwind', 'JavaScript'],
+
+	},
+	{
+		titleEs: 'Portfolio Interactivo',
+		titleEn: 'Interactive Portfolio',
+		descriptionEs: 'Portfolio interactivo con animaciones y efectos visuales avanzados',
+		descriptionEn: 'Interactive portfolio with animations and advanced visual effects',
+		image: '/portfoliodemo.png',
+		tech: ['Astro', 'CSS3'],
+
+	},
+	{
+		titleEs: 'Página web Centro Estético',
+		titleEn: 'Aesthetic Center Website',
+		descriptionEs: 'Pagina de servicios de Centro Estético, registro de clientes y reservación de citas',
+		descriptionEn: 'Beauty center services page, customer registration, and appointment booking',
+		image: '/paginaestetica.png',
+		tech: ['React', 'Firebase', 'Tailwind'],
+
+	}
+];
+---
+
+<section id="projects">
+	<div class="container">
+		<h2 class="section-title" data-lang-es="03. Proyectos Destacados" data-lang-en="03. Featured Projects">
+			<span class="title-number">03.</span>
+			<span class="title-text" data-lang-es="Proyectos Destacados" data-lang-en="Featured Projects">Proyectos Destacados</span>
+		</h2>
+		<div class="carousel-container">
+			<div class="carousel" id="carousel">
+				{projects.map((project, index) => (
+					<div class="project-card" data-index={index} style={`--project-color: ${project.color}`}>
+						<div class="project-image-wrapper">
+							<img src={project.image} alt={project.titleEs} class="project-image" />
+							<div class="project-overlay"></div>
+						</div>
+						<div class="project-content">
+							<h3 class="project-title" data-lang-es={project.titleEs} data-lang-en={project.titleEn}>{project.titleEs}</h3>
+							<p class="project-description" data-lang-es={project.descriptionEs} data-lang-en={project.descriptionEn}>{project.descriptionEs}</p>
+							<div class="project-tech">
+								{project.tech.map((tech) => (
+									<span class="tech-badge">{tech}</span>
+								))}
+							</div>
+								<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+									<path d="M7 17L17 7M17 7H7M17 7V17"/>
+								</svg>
+							</a>
+						</div>
+					</div>
+				))}
+			</div>
+			<div class="carousel-controls">
+				<button class="carousel-btn prev" id="prevBtn">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<path d="M15 18l-6-6 6-6"/>
+					</svg>
+				</button>
+				<div class="carousel-dots" id="carouselDots">
+					{projects.map((_, index) => (
+						<button class="dot" data-index={index}></button>
+					))}
+				</div>
+				<button class="carousel-btn next" id="nextBtn">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<path d="M9 18l6-6-6-6"/>
+					</svg>
+				</button>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+	const carousel = document.getElementById('carousel');
+	const prevBtn = document.getElementById('prevBtn');
+	const nextBtn = document.getElementById('nextBtn');
+	const dots = document.querySelectorAll('.dot');
+	const cards = document.querySelectorAll('.project-card');
+
+	let currentIndex = 0;
+	const totalCards = cards.length;
+
+	function updateCarousel() {
+		cards.forEach((card, index) => {
+			card.classList.remove('active', 'prev', 'next');
+
+			if (index === currentIndex) {
+				card.classList.add('active');
+			} else if (index === (currentIndex - 1 + totalCards) % totalCards) {
+				card.classList.add('prev');
+			} else if (index === (currentIndex + 1) % totalCards) {
+				card.classList.add('next');
+			}
+		});
+
+		dots.forEach((dot, index) => {
+			dot.classList.toggle('active', index === currentIndex);
+		});
+	}
+
+	function nextSlide() {
+		currentIndex = (currentIndex + 1) % totalCards;
+		updateCarousel();
+	}
+
+	function prevSlide() {
+		currentIndex = (currentIndex - 1 + totalCards) % totalCards;
+		updateCarousel();
+	}
+
+	nextBtn?.addEventListener('click', nextSlide);
+	prevBtn?.addEventListener('click', prevSlide);
+
+	dots.forEach((dot) => {
+		dot.addEventListener('click', (e) => {
+			const target = e.target as HTMLElement;
+			currentIndex = parseInt(target.dataset.index || '0');
+			updateCarousel();
+		});
+	});
+
+	updateCarousel();
+
+	setInterval(nextSlide, 5000);
+
+	function updateTranslations() {
+		const currentLang = document.documentElement.getAttribute('data-lang') || 'es';
+		const elements = document.querySelectorAll('[data-lang-es][data-lang-en]');
+
+		elements.forEach((el) => {
+			const key = `data-lang-${currentLang}`;
+			const text = el.getAttribute(key);
+			if (text) {
+				if (el.classList.contains('title-text')) {
+					el.textContent = text.split('. ')[1] || text;
+				} else if (el.classList.contains('project-link')) {
+					const svg = el.querySelector('svg');
+					el.textContent = text;
+					if (svg) el.appendChild(svg);
+				} else {
+					el.textContent = text;
+				}
+			}
+		});
+	}
+
+	updateTranslations();
+
+	const observer = new MutationObserver(() => {
+		updateTranslations();
+	});
+
+	observer.observe(document.documentElement, {
+		attributes: true,
+		attributeFilter: ['data-lang']
+	});
+</script>
+
+<style>
+	#projects {
+		min-height: 100vh;
+		padding: 8rem 2rem;
+		display: flex;
+		align-items: center;
+	}
+
+	.container {
+		max-width: 1400px;
+		margin: 0 auto;
+		width: 100%;
+	}
+
+	.section-title {
+		font-size: clamp(2rem, 5vw, 3rem);
+		color: var(--color-text);
+		margin-bottom: 4rem;
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+	}
+
+	.title-number {
+		font-size: 1.5rem;
+		color: var(--color-primary);
+		font-family: var(--font-heading);
+	}
+
+	.section-title::after {
+		content: '';
+		flex: 1;
+		height: 2px;
+		background: linear-gradient(to right, var(--color-primary), transparent);
+		margin-left: 2rem;
+	}
+
+	.carousel-container {
+		position: relative;
+		width: 100%;
+		overflow: visible;
+	}
+
+	.carousel {
+		position: relative;
+		height: 600px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		perspective: 1000px;
+	}
+
+	.project-card {
+		position: absolute;
+		width: 400px;
+		height: 550px;
+		background: rgba(20, 27, 58, 0.8);
+		border: 2px solid var(--project-color);
+		border-radius: 20px;
+		overflow: hidden;
+		transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+		opacity: 0;
+		transform: translateX(0) scale(0.8) rotateY(0deg);
+		pointer-events: none;
+		backdrop-filter: blur(10px);
+	}
+
+	.project-card.active {
+		opacity: 1;
+		transform: translateX(0) scale(1) rotateY(0deg);
+		z-index: 3;
+		pointer-events: all;
+		box-shadow:
+			0 20px 60px rgba(0, 0, 0, 0.5),
+			0 0 40px var(--project-color);
+	}
+
+	.project-card.prev {
+		opacity: 0.5;
+		transform: translateX(-450px) scale(0.85) rotateY(25deg);
+		z-index: 2;
+		filter: brightness(0.7);
+	}
+
+	.project-card.next {
+		opacity: 0.5;
+		transform: translateX(450px) scale(0.85) rotateY(-25deg);
+		z-index: 2;
+		filter: brightness(0.7);
+	}
+
+	.project-image-wrapper {
+		position: relative;
+		width: 100%;
+		height: 250px;
+		overflow: hidden;
+	}
+
+	.project-image {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.6s ease;
+	}
+
+	.project-card:hover .project-image {
+		transform: scale(1.1);
+	}
+
+	.project-overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(to bottom, transparent 0%, rgba(10, 14, 39, 0.9) 100%);
+	}
+
+	.project-content {
+		padding: 2rem;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.project-title {
+		font-size: 1.8rem;
+		font-family: var(--font-heading);
+		color: var(--color-text);
+		margin: 0;
+	}
+
+	.project-description {
+		color: var(--color-text-muted);
+		line-height: 1.6;
+		font-size: 1rem;
+	}
+
+	.project-tech {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.tech-badge {
+		padding: 0.4rem 1rem;
+		background: rgba(0, 240, 255, 0.1);
+		border: 1px solid var(--project-color);
+		border-radius: 20px;
+		font-size: 0.85rem;
+		color: var(--project-color);
+		font-family: var(--font-heading);
+	}
+
+	.project-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.8rem 1.5rem;
+		background: var(--project-color);
+		color: var(--color-bg);
+		text-decoration: none;
+		border-radius: 8px;
+		font-weight: 600;
+		font-family: var(--font-heading);
+		align-self: flex-start;
+		transition: all 0.3s ease;
+		margin-top: auto;
+	}
+
+	.project-link:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 5px 20px var(--project-color);
+	}
+
+	.carousel-controls {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 2rem;
+		margin-top: 3rem;
+	}
+
+	.carousel-btn {
+		width: 50px;
+		height: 50px;
+		border: 2px solid var(--color-primary);
+		background: rgba(0, 240, 255, 0.1);
+		color: var(--color-primary);
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		transition: all 0.3s ease;
+	}
+
+	.carousel-btn:hover {
+		background: var(--color-primary);
+		color: var(--color-bg);
+		transform: scale(1.1);
+		box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+	}
+
+	.carousel-dots {
+		display: flex;
+		gap: 1rem;
+	}
+
+	.dot {
+		width: 12px;
+		height: 12px;
+		border-radius: 50%;
+		background: rgba(0, 240, 255, 0.3);
+		border: 2px solid var(--color-primary);
+		cursor: pointer;
+		transition: all 0.3s ease;
+	}
+
+	.dot.active {
+		background: var(--color-primary);
+		box-shadow: 0 0 15px rgba(0, 240, 255, 0.8);
+		transform: scale(1.3);
+	}
+
+	@media (max-width: 1200px) {
+		.carousel {
+			height: 550px;
+		}
+
+		.project-card {
+			width: 350px;
+			height: 500px;
+		}
+
+		.project-card.prev,
+		.project-card.next {
+			transform: translateX(-200px) scale(0.75);
+		}
+
+		.project-card.next {
+			transform: translateX(200px) scale(0.75);
+		}
+	}
+
+	@media (max-width: 768px) {
+		#projects {
+			padding: 6rem 1rem;
+		}
+
+		.carousel {
+			height: 600px;
+		}
+
+		.project-card {
+			width: 90%;
+			max-width: 350px;
+		}
+
+		.project-card.prev,
+		.project-card.next {
+			opacity: 0;
+			transform: translateX(-100%) scale(0.5);
+		}
+
+		.project-card.next {
+			transform: translateX(100%) scale(0.5);
+		}
+	}
+</style>

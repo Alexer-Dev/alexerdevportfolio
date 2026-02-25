@@ -1,0 +1,270 @@
+---
+---
+
+<section id="about">
+	<div class="container">
+		<h2 class="section-title" data-lang-es="01. Sobre Mí" data-lang-en="01. About Me">
+			<span class="title-number">01.</span>
+			<span class="title-text">Sobre Mí</span>
+		</h2>
+		<div class="about-content">
+			<div class="about-text">
+				<p class="highlight" data-lang-es="Desarrollador web apasionado por crear experiencias digitales únicas que combinan diseño, funcionalidad y la emoción del mundo gaming." data-lang-en="Web developer passionate about creating unique digital experiences that combine design, functionality, and the excitement of the gaming world.">
+					Desarrollador web apasionado por crear experiencias digitales únicas que combinan diseño, funcionalidad y la emoción del mundo gaming.
+				</p>
+				<p data-lang-es="Especializado en tecnologías frontend modernas, transformo ideas en aplicaciones web interactivas y responsivas. Mi enfoque combina clean code, mejores prácticas y un toque de creatividad inspirada en la industria de los videojuegos." data-lang-en="Specialized in modern frontend technologies, I transform ideas into interactive and responsive web applications. My approach combines clean code, best practices, and a touch of creativity inspired by the video game industry.">
+					Especializado en tecnologías frontend modernas, transformo ideas en aplicaciones web interactivas y responsivas. Mi enfoque combina clean code, mejores prácticas y un toque de creatividad inspirada en la industria de los videojuegos.
+				</p>
+				<p data-lang-es="Cada proyecto es una nueva misión donde el objetivo es superar expectativas y entregar soluciones innovadoras que impacten positivamente a los usuarios." data-lang-en="Every project is a new mission where the goal is to exceed expectations and deliver innovative solutions that positively impact users.">
+					Cada proyecto es una nueva misión donde el objetivo es superar expectativas y entregar soluciones innovadoras que impacten positivamente a los usuarios.
+				</p>
+			</div>
+			<div class="about-visual">
+				<div class="photo-container">
+					<div class="photo-frame">
+						<img src="/perfil-cv2.png" alt="Foto personal" />
+					</div>
+				</div>
+				<div class="stats-grid">
+					<div class="stat-card">
+						<div class="stat-number">3+</div>
+						<div class="stat-label" data-lang-es="Proyectos" data-lang-en="Projects">Proyectos</div>
+					</div>
+					<div class="stat-card">
+						<div class="stat-number">1</div>
+						<div class="stat-label" data-lang-es="Año Exp" data-lang-en="Years Exp">Año Exp</div>
+					</div>
+					<div class="stat-card">
+						<div class="stat-number">100%</div>
+						<div class="stat-label" data-lang-es="Dedicación" data-lang-en="Dedication">Dedicación</div>
+					</div>
+					<div class="stat-card">
+						<div class="stat-number">∞</div>
+						<div class="stat-label" data-lang-es="Ideas" data-lang-en="Ideas">Ideas</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	#about {
+		min-height: 100vh;
+		padding: 8rem 2rem;
+		display: flex;
+		align-items: center;
+	}
+
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		width: 100%;
+	}
+
+	.section-title {
+		font-size: clamp(2rem, 5vw, 3rem);
+		color: var(--color-text);
+		margin-bottom: 4rem;
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+	}
+
+	.title-number {
+		font-size: 1.5rem;
+		color: var(--color-primary);
+		font-family: var(--font-heading);
+	}
+
+	.section-title::after {
+		content: '';
+		flex: 1;
+		height: 2px;
+		background: linear-gradient(to right, var(--color-primary), transparent);
+		margin-left: 2rem;
+	}
+
+	.about-content {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 4rem;
+		align-items: center;
+	}
+
+	.about-text {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+	}
+
+	.about-text p {
+		font-size: 1.1rem;
+		line-height: 1.8;
+		color: var(--color-text-muted);
+	}
+
+	.highlight {
+		color: var(--color-text);
+		font-size: 1.3rem;
+		font-weight: 500;
+		position: relative;
+		padding-left: 1.5rem;
+	}
+
+	.highlight::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		width: 4px;
+		background: linear-gradient(to bottom, var(--color-primary), var(--color-secondary));
+		border-radius: 2px;
+	}
+
+	.stats-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1.5rem;
+	}
+
+	.stat-card {
+		background: rgba(0, 240, 255, 0.05);
+		border: 2px solid var(--color-primary);
+		border-radius: 16px;
+		padding: 2rem;
+		text-align: center;
+		transition: all 0.3s ease;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.stat-card::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: -100%;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.2), transparent);
+		transition: left 10.5s;
+	}
+
+	.stat-card:hover::before {
+		left: 100%;
+	}
+
+	.stat-card:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 10px 30px rgba(0, 240, 255, 0.3);
+		background: rgba(0, 240, 255, 0.1);
+	}
+
+	.stat-number {
+		font-size: 3rem;
+		font-family: var(--font-heading);
+		font-weight: 900;
+		color: var(--color-primary);
+		margin-bottom: 0.5rem;
+		text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+	}
+
+	.stat-label {
+		font-size: 0.9rem;
+		color: var(--color-text-muted);
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+	}
+
+	.about-visual {
+		display: flex;
+		flex-direction: column;
+		gap: 3rem;
+	}
+
+	.photo-container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.photo-frame {
+		width: 300px;
+		height: 300px;
+		border-radius: 20px;
+		background: rgba(0, 240, 255, 0.05);
+		border: 2px solid var(--color-primary);
+		overflow: hidden;
+		transition: all 0.3s ease;
+		position: relative;
+		box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
+	}
+
+	.photo-frame:hover {
+		box-shadow: 0 0 50px rgba(0, 240, 255, 0.4);
+		transform: translateY(-5px);
+	}
+
+	.photo-frame img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	@media (max-width: 968px) {
+		#about {
+			padding: 6rem 2rem;
+		}
+
+		.about-content {
+			grid-template-columns: 1fr;
+			gap: 3rem;
+		}
+
+		.stats-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (max-width: 480px) {
+		.stats-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.photo-frame {
+			width: 250px;
+			height: 250px;
+		}
+	}
+</style>
+
+<script>
+	function updateTranslations() {
+		const currentLang = document.documentElement.getAttribute('data-lang') || 'es';
+		const elements = document.querySelectorAll('[data-lang-es][data-lang-en]');
+
+		elements.forEach((el) => {
+			const key = `data-lang-${currentLang}`;
+			const text = el.getAttribute(key);
+			if (text) {
+				if (el.classList.contains('title-text')) {
+					el.textContent = text.split('. ')[1];
+				} else {
+					el.textContent = text;
+				}
+			}
+		});
+	}
+
+	updateTranslations();
+
+	const observer = new MutationObserver(() => {
+		updateTranslations();
+	});
+
+	observer.observe(document.documentElement, {
+		attributes: true,
+		attributeFilter: ['data-lang']
+	});
+</script>

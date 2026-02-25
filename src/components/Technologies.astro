@@ -1,0 +1,181 @@
+---
+const techDev = [
+	{ name: 'JavaScript', level: 95, color: '#f7df1e' },
+	{ name: 'React', level: 90, color: '#61dafb' },
+	{ name: 'Astro', level: 85, color: '#ff5d01' },
+	{ name: 'Nextjs', level: 95, color: '#ffffff' },
+	{ name: 'TypeScript', level: 95, color: '#3178c6' },
+	{ name: 'Node.js', level: 75, color: '#339933' }
+];
+
+const techIT = [
+	{ name: 'Active Directory', level: 98, color: '#0078d4' },
+	{ name: 'Windows Server', level: 95, color: '#ff1111' },
+	{ name: 'Networking & VPN', level: 90, color: '#00f0ff' },
+	{ name: 'Cybersecurity', level: 85, color: '#ff6b00' },
+	{ name: 'Cloud (O365/Azure)', level: 92, color: '#00a1f1' },
+	{ name: 'Help Desk Mastery', level: 98, color: '#00ff88' }
+];
+---
+
+<section id="technologies">
+	<div class="container">
+		<h2 class="section-title">
+			<span class="title-number">02.</span>
+			<span class="title-text" data-lang-es="Habilidades & Tecnologías" data-lang-en="Skills & Technologies">Habilidades & Tecnologías</span>
+		</h2>
+
+		<div id="grid-dev" class="tech-grid active">
+			{techDev.map((tech) => (
+				<div class="tech-card" style={`--tech-color: ${tech.color}`}>
+					<div class="tech-header">
+						<h3 class="tech-name">{tech.name}</h3>
+						<span class="tech-level">{tech.level}%</span>
+					</div>
+					<div class="progress-bar">
+						<div class="progress-fill" style={`--progress: ${tech.level}%; --tech-color: ${tech.color}`}></div>
+					</div>
+					<div class="tech-glow"></div>
+				</div>
+			))}
+		</div>
+
+		<div id="grid-it" class="tech-grid">
+			{techIT.map((tech) => (
+				<div class="tech-card" style={`--tech-color: ${tech.color}`}>
+					<div class="tech-header">
+						<h3 class="tech-name">{tech.name}</h3>
+						<span class="tech-level">{tech.level}%</span>
+					</div>
+					<div class="progress-bar">
+						<div class="progress-fill" style={`--progress: ${tech.level}%; --tech-color: ${tech.color}`}></div>
+					</div>
+					<div class="tech-glow"></div>
+				</div>
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	#technologies {
+		min-height: 100vh;
+		padding: 8rem 2rem;
+		display: flex;
+		align-items: center;
+	}
+
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		width: 100%;
+	}
+
+	.tech-grid {
+		display: none; /* Oculto por defecto */
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 2rem;
+		opacity: 0;
+		transition: opacity 0.6s ease;
+	}
+
+	.tech-grid.active {
+		display: grid;
+		opacity: 1;
+	}
+
+	/* Estilos de las Cards (Mantenidos y optimizados) */
+	.tech-card {
+		background: rgba(20, 27, 58, 0.6);
+		border: 2px solid rgba(0, 240, 255, 0.1);
+		border-radius: 16px;
+		padding: 2rem;
+		transition: all 0.3s ease;
+		position: relative;
+		overflow: hidden;
+		backdrop-filter: blur(10px);
+	}
+
+	.tech-card:hover {
+		transform: translateY(-5px);
+		border-color: var(--tech-color);
+		box-shadow: 0 10px 40px rgba(0, 240, 255, 0.1);
+	}
+
+	.tech-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 1rem;
+		position: relative;
+		z-index: 2;
+	}
+
+	.progress-bar {
+		width: 100%;
+		height: 8px;
+		background: rgba(255, 255, 255, 0.05);
+		border-radius: 10px;
+		overflow: hidden;
+	}
+
+	.progress-fill {
+		height: 100%;
+		width: var(--progress);
+		background: linear-gradient(90deg, var(--tech-color), var(--color-primary));
+		border-radius: 10px;
+		box-shadow: 0 0 10px var(--tech-color);
+		/* Eliminamos la animación CSS fija para que se dispare al cambiar de perfil */
+	}
+
+	/* Resto de estilos del título (mantenidos de tu original) */
+	.section-title { font-size: clamp(2rem, 5vw, 3rem); color: var(--color-text); margin-bottom: 4rem; display: flex; align-items: center; gap: 1rem; }
+	.title-number { color: var(--color-primary); font-family: var(--font-heading); }
+	.section-title::after { content: ''; flex: 1; height: 2px; background: linear-gradient(to right, var(--color-primary), transparent); margin-left: 2rem; }
+</style>
+
+<script>
+	// Lógica de Sincronización
+	let currentProfile = 'dev';
+	const gridDev = document.getElementById('grid-dev');
+	const gridIT = document.getElementById('grid-it');
+
+	function switchTechProfile() {
+		// Desvanecer actual
+		gridDev.style.opacity = '0';
+		gridIT.style.opacity = '0';
+
+		setTimeout(() => {
+			if (currentProfile === 'dev') {
+				gridDev.classList.remove('active');
+				gridIT.classList.add('active');
+				currentProfile = 'it';
+			} else {
+				gridIT.classList.remove('active');
+				gridDev.classList.add('active');
+				currentProfile = 'dev';
+			}
+			// Mostrar nuevo
+			setTimeout(() => {
+				gridDev.style.opacity = '1';
+				gridIT.style.opacity = '1';
+			}, 50);
+		}, 600);
+	}
+
+	// SINCRONIZACIÓN: 
+	// Importante: Este intervalo debe ser el mismo que el del Hero (6000ms)
+	setInterval(switchTechProfile, 6000);
+
+	// Lógica de traducción
+	function updateTranslations() {
+		const currentLang = document.documentElement.getAttribute('data-lang') || 'es';
+		document.querySelectorAll('[data-lang-es][data-lang-en]').forEach((el) => {
+			const text = el.getAttribute(`data-lang-${currentLang}`);
+			if (text) el.textContent = text;
+		});
+	}
+
+	const observer = new MutationObserver(updateTranslations);
+	observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-lang'] });
+</script>

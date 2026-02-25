@@ -1,0 +1,110 @@
+---
+---
+
+<div class="language-switcher">
+	<button class="lang-btn" data-lang="es" aria-label="Español">ES</button>
+	<div class="divider"></div>
+	<button class="lang-btn" data-lang="en" aria-label="English">EN</button>
+</div>
+
+<style>
+	.language-switcher {
+		position: fixed;
+		top: 2rem;
+		right: 2rem;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		background: rgba(0, 240, 255, 0.05);
+		border: 2px solid var(--color-primary);
+		border-radius: 12px;
+		padding: 0.5rem;
+		z-index: 1000;
+		backdrop-filter: blur(10px);
+	}
+
+	.lang-btn {
+		background: none;
+		border: none;
+		color: var(--color-text-muted);
+		font-size: 0.9rem;
+		font-weight: 600;
+		padding: 0.5rem 0.75rem;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		border-radius: 8px;
+	}
+
+	.lang-btn:hover {
+		color: var(--color-primary);
+	}
+
+	.lang-btn.active {
+		background: rgba(0, 240, 255, 0.15);
+		color: var(--color-primary);
+		box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+	}
+
+	.divider {
+		width: 1px;
+		height: 1.5rem;
+		background: var(--color-primary);
+		opacity: 0.3;
+	}
+
+	@media (max-width: 480px) {
+		.language-switcher {
+			top: 1rem;
+			right: 1rem;
+			padding: 0.4rem;
+		}
+
+		.lang-btn {
+			font-size: 0.8rem;
+			padding: 0.4rem 0.6rem;
+		}
+
+		.divider {
+			height: 1.2rem;
+		}
+	}
+</style>
+
+<script>
+	function initLanguageSwitcher() {
+		const buttons = document.querySelectorAll('.lang-btn');
+		const savedLang = localStorage.getItem('language') || 'es';
+
+		function setLanguage(lang: string) {
+			document.documentElement.lang = lang;
+			localStorage.setItem('language', lang);
+
+			buttons.forEach(btn => {
+				if (btn.getAttribute('data-lang') === lang) {
+					btn.classList.add('active');
+				} else {
+					btn.classList.remove('active');
+				}
+			});
+
+			document.documentElement.setAttribute('data-lang', lang);
+		}
+
+		buttons.forEach(btn => {
+			btn.addEventListener('click', () => {
+				const lang = btn.getAttribute('data-lang');
+				if (lang) setLanguage(lang);
+			});
+		});
+
+		setLanguage(savedLang);
+	}
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initLanguageSwitcher);
+	} else {
+		initLanguageSwitcher();
+	}
+</script>
