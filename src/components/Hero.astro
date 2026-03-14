@@ -1,5 +1,14 @@
 <section id="hero">
 	<div class="container">
+		<div class="profile-buttons">
+			<button class="profile-btn active" data-profile="0">
+				<span>Web Developer</span>
+			</button>
+			<button class="profile-btn" data-profile="1">
+				<span>Senior IT Support</span>
+			</button>
+		</div>
+
 		<div class="glitch-wrapper">
 			<h1 class="glitch" id="title-text">WEB DEVELOPER</h1>
 		</div>
@@ -43,45 +52,114 @@
 </section>
 
 <style>
-
-  .container {
+	.container {
 		max-width: 1400px;
 		margin: 0 auto;
-		/* Añadimos 8rem de espacio arriba para que no pegue al borde superior */
-		padding: 8rem 2rem 4rem 2rem; 
+		padding: 2rem 2rem 3rem 2rem;
 		text-align: center;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
 		min-height: 100vh;
+		padding-top: clamp(8rem, 15vh, 12rem);
+	}
+
+	.profile-buttons {
+		display: flex;
+		gap: 1rem;
+		margin-bottom: 3rem;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+
+	.profile-btn {
+		padding: 0.8rem 2rem;
+		font-size: 1rem;
+		font-family: var(--font-heading);
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		background: rgba(20, 27, 58, 0.4);
+		border: 2px solid rgba(0, 240, 255, 0.3);
+		border-radius: 8px;
+		color: #8892b5;
+		cursor: pointer;
+		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		position: relative;
+		overflow: hidden;
+	}
+
+	.profile-btn::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: -100%;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.2), transparent);
+		transition: left 0.5s;
+	}
+
+	.profile-btn:hover::before {
+		left: 100%;
+	}
+
+	.profile-btn:hover {
+		color: #00f0ff;
+		border-color: #00f0ff;
+		background: rgba(0, 240, 255, 0.1);
+		transform: translateY(-2px);
+		box-shadow: 0 5px 20px rgba(0, 240, 255, 0.3);
+	}
+
+	.profile-btn.active {
+		background: rgba(0, 240, 255, 0.15);
+		border-color: #00f0ff;
+		color: #00f0ff;
+		box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+	}
+
+	.profile-btn span {
+		position: relative;
+		z-index: 1;
+	}
+
+	.glitch-wrapper {
+		width: 100%;
+		text-align: center;
+		display: flex;
+		justify-content: center;
 	}
 
 	.glitch {
-		/* Tamaño masivo para ocupar el encabezado */
-		font-size: clamp(3.5rem, 15vw, 10rem); 
+		font-size: clamp(2.5rem, 10vw, 8rem);
 		font-weight: 900;
 		text-transform: uppercase;
-		color: #e0e6ff; /* Blanco azulado muy sutil */
+		color: #e0e6ff;
 		letter-spacing: -0.03em;
-		line-height: 0.85;
+		line-height: 1.1;
 		margin-bottom: 1.5rem;
 		transition: opacity 0.5s ease;
-		
+		white-space: nowrap;
+		display: inline-block;
+		max-width: calc(100vw - 4rem);
+		overflow-wrap: normal;
+		text-overflow: clip;
+		overflow: visible;
 
-		text-shadow: 
+		text-shadow:
 			0 0 15px rgba(0, 240, 255, 0.1),
 			0 0 30px rgba(0, 240, 255, 0.05);
-		
+
 		background: linear-gradient(
-			rgba(255, 255, 255, 1) 50%, 
+			rgba(255, 255, 255, 1) 50%,
 			rgba(255, 255, 255, 0.7) 50%
 		);
 		background-size: 100% 4px;
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
+		background-clip: text;
 	}
-
 
 	.subtitle-wrapper {
 		margin-bottom: 2.5rem;
@@ -93,7 +171,6 @@
 		letter-spacing: 0.2em;
 		text-transform: uppercase;
 	}
-
 
 	.tags-master-container {
 		width: 100%;
@@ -108,7 +185,7 @@
 	.tech-tags {
 		display: none;
 		flex-wrap: wrap;
-		gap: 15px 20px; 
+		gap: 15px 20px;
 		justify-content: center;
 		opacity: 0;
 		transition: opacity 0.5s ease;
@@ -119,12 +196,11 @@
 		opacity: 1;
 	}
 
-	
 	.tag {
 		padding: 6px 20px;
 		background: rgba(20, 27, 58, 0.4);
 		border: 1px solid rgba(0, 240, 255, 0.2);
-		border-radius: 2px; 
+		border-radius: 2px;
 		font-family: var(--font-heading);
 		font-size: 0.8rem;
 		color: #8892b5;
@@ -141,20 +217,7 @@
 		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 	}
 
-	/* --- BOTONES DE ACCIÓN --- */
 	.cta-buttons {
-		display: flex;
-		gap: 2rem;
-		justify-content: center;
-	}
-
-	.btn {
-		padding: 14px 35px;
-		font-size: 0.9rem;
-		letter-spacing: 0.2em;
-
-	}
-.cta-buttons {
 		display: flex;
 		gap: 1.5rem;
 		justify-content: center;
@@ -221,21 +284,39 @@
 	}
 
 	@media (max-width: 768px) {
+		.container {
+			padding-top: clamp(7rem, 12vh, 9rem);
+			padding-bottom: 2rem;
+		}
+		.profile-buttons {
+			flex-direction: column;
+			width: 100%;
+			max-width: 320px;
+			gap: 0.8rem;
+			margin-bottom: 2rem;
+		}
+		.profile-btn {
+			width: 100%;
+			padding: 0.9rem 1.5rem;
+			font-size: 0.9rem;
+		}
+		.subtitle-wrapper {
+			margin-bottom: 2rem;
+		}
+		.tags-master-container {
+			margin-bottom: 2rem;
+		}
 		.cta-buttons {
 			flex-direction: column;
 			align-items: center;
 			width: 100%;
+			max-width: 280px;
 		}
 		.btn {
 			width: 100%;
 			max-width: 300px;
 			text-align: center;
 		}
-	}
-	@media (max-width: 768px) {
-		.container { padding-top: 6rem; }
-		.glitch { font-size: 4rem; }
-		.cta-buttons { flex-direction: column; width: 100%; max-width: 280px; }
 	}
 </style>
 
@@ -254,38 +335,63 @@
 	];
 
 	let currentIndex = 0;
-	const titleElement = document.getElementById('title-text');
-	const subtitleContainer = document.getElementById('subtitle-text');
-	const subtitleText = subtitleContainer.querySelector('.typed-text');
+	const titleElement = document.getElementById('title-text') as HTMLElement;
+	const subtitleContainer = document.getElementById('subtitle-text') as HTMLElement;
+	const subtitleText = subtitleContainer.querySelector('.typed-text') as HTMLElement;
+	const profileButtons = document.querySelectorAll('.profile-btn');
 
-	function updateContent() {
-		const currentLang = document.documentElement.getAttribute('data-lang') || 'es';
-		const profile = profiles[currentIndex];
-        const nextIndex = (currentIndex + 1) % profiles.length;
-        const nextProfile = profiles[nextIndex];
+	function resizeTitle() {
+		const maxFontSize = 128;
+		const minFontSize = 16;
+		const availableWidth = Math.min(window.innerWidth - 64, 1400 - 64);
 
-		// 1. Desvanecer todo
-		titleElement.style.opacity = '0';
-		subtitleContainer.style.opacity = '0';
-        document.getElementById(profile.tagsId).classList.remove('active');
+		titleElement.style.fontSize = maxFontSize + 'px';
 
-		setTimeout(() => {
-			// 2. Cambiar textos
-			titleElement.textContent = nextProfile.title;
-			subtitleText.textContent = nextProfile.subtitle[currentLang];
-            subtitleText.setAttribute('data-lang-es', nextProfile.subtitle.es);
-            subtitleText.setAttribute('data-lang-en', nextProfile.subtitle.en);
-			
-			// 3. Activar el siguiente grupo de tags
-            document.getElementById(nextProfile.tagsId).classList.add('active');
-
-			// 4. Mostrar todo
-			titleElement.style.opacity = '1';
-			subtitleContainer.style.opacity = '1';
-			
-			currentIndex = nextIndex;
-		}, 500);
+		let fontSize = maxFontSize;
+		while (titleElement.scrollWidth > availableWidth && fontSize > minFontSize) {
+			fontSize -= 2;
+			titleElement.style.fontSize = fontSize + 'px';
+		}
 	}
 
-	setInterval(updateContent, 6000);
+	resizeTitle();
+	window.addEventListener('resize', resizeTitle);
+
+	function updateContent(profileIndex: number) {
+		const currentLang = document.documentElement.getAttribute('data-lang') || 'es';
+		const profile = profiles[currentIndex];
+		const nextProfile = profiles[profileIndex];
+
+		profileButtons.forEach(btn => btn.classList.remove('active'));
+		profileButtons[profileIndex].classList.add('active');
+
+		titleElement.style.opacity = '0';
+		subtitleContainer.style.opacity = '0';
+		document.getElementById(profile.tagsId)?.classList.remove('active');
+
+		setTimeout(() => {
+			titleElement.textContent = nextProfile.title;
+			subtitleText.textContent = nextProfile.subtitle[currentLang];
+			subtitleText.setAttribute('data-lang-es', nextProfile.subtitle.es);
+			subtitleText.setAttribute('data-lang-en', nextProfile.subtitle.en);
+
+			document.getElementById(nextProfile.tagsId)?.classList.add('active');
+
+			resizeTitle();
+
+			titleElement.style.opacity = '1';
+			subtitleContainer.style.opacity = '1';
+
+			currentIndex = profileIndex;
+		}, 300);
+	}
+
+	profileButtons.forEach((button) => {
+		button.addEventListener('click', () => {
+			const profileIndex = parseInt(button.getAttribute('data-profile') || '0');
+			if (profileIndex !== currentIndex) {
+				updateContent(profileIndex);
+			}
+		});
+	});
 </script>

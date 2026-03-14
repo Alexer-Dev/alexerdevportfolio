@@ -6,7 +6,7 @@ import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 <html lang="es">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Developer Portfolio | Web & Gaming</title>
@@ -45,18 +45,16 @@ import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 		padding: 0;
 	}
 
-	html {
-		scroll-behavior: smooth;
-	}
-
-	body {
-		margin: 0;
-		width: 100%;
-		min-height: 100vh;
+	html, body {
+		overflow-x: hidden;
+		max-width: 100%;
 		background: var(--color-bg);
 		color: var(--color-text);
 		font-family: var(--font-body);
-		overflow-x: hidden;
+		min-height: 100vh;
+	}
+
+	body {
 		position: relative;
 	}
 
