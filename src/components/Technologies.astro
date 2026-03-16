@@ -41,7 +41,6 @@ const techIT = [
 				<div class="tech-card" style={`--tech-color: ${tech.color}`}>
 					<div class="tech-header">
 						<h3 class="tech-name">{tech.name}</h3>
-						<span class="tech-level">{tech.level}%</span>
 					</div>
 				</div>
 			))}
@@ -64,7 +63,7 @@ const techIT = [
 	}
 
 	.tech-grid {
-		display: none; /* Oculto por defecto */
+		display: none; /* Oculto*/
 		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 		gap: 2rem;
 		opacity: 0;
@@ -76,7 +75,7 @@ const techIT = [
 		opacity: 1;
 	}
 
-	/* Estilos de las Cards (Mantenidos y optimizados) */
+	/* Estilos de las Cards*/
 	.tech-card {
 		background: rgba(20, 27, 58, 0.6);
 		border: 2px solid rgba(0, 240, 255, 0.1);
@@ -117,10 +116,10 @@ const techIT = [
 		background: linear-gradient(90deg, var(--tech-color), var(--color-primary));
 		border-radius: 10px;
 		box-shadow: 0 0 10px var(--tech-color);
-		/* Eliminamos la animación CSS fija para que se dispare al cambiar de perfil */
+		/* Se activa al cambiar de perfil */
 	}
 
-	/* Resto de estilos del título (mantenidos de tu original) */
+	/* Resto de estilos del título */
 	.section-title { font-size: clamp(2rem, 5vw, 3rem); color: var(--color-text); margin-bottom: 4rem; display: flex; align-items: center; gap: 1rem; }
 	.title-number { color: var(--color-primary); font-family: var(--font-heading); }
 	.section-title::after { content: ''; flex: 1; height: 2px; background: linear-gradient(to right, var(--color-primary), transparent); margin-left: 2rem; }
@@ -159,7 +158,7 @@ const techIT = [
 	// Importante: Este intervalo debe ser el mismo que el del Hero (6000ms)
 	setInterval(switchTechProfile, 6000);
 
-	// Lógica de traducción
+	// traducción
 	function updateTranslations() {
 		const currentLang = document.documentElement.getAttribute('data-lang') || 'es';
 		document.querySelectorAll('[data-lang-es][data-lang-en]').forEach((el) => {
