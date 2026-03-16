@@ -48,7 +48,7 @@ const projects = [
 		<div class="carousel-container">
 			<div class="carousel" id="carousel">
 				{projects.map((project, index) => (
-					<div class="project-card" data-index={index} style={`--project-color: ${project.color}`}>
+					<div class="project-card" data-index={index} >
 						<div class="project-image-wrapper">
 							<img src={project.image} alt={project.titleEs} class="project-image" />
 							<div class="project-overlay"></div>
@@ -66,8 +66,7 @@ const projects = [
 								</svg>
 							</a>
 						</div>
-					</div>
-				))}
+					))}
 			</div>
 			<div class="carousel-controls">
 				<button class="carousel-btn prev" id="prevBtn">
