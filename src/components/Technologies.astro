@@ -9,12 +9,12 @@ const techDev = [
 ];
 
 const techIT = [
-	{ name: 'Active Directory', level: 90, color: '#0078d4' },
-	{ name: 'Windows Server', level: 95, color: '#ff1111' },
-	{ name: 'Networking & VPN', level: 90, color: '#00f0ff' },
-	{ name: 'Cybersecurity', level: 85, color: '#ff6b00' },
-	{ name: 'Cloud (O365/Azure)', level: 90, color: '#00a1f1' },
-	{ name: 'Help Desk Mastery', level: 90, color: '#00ff88' }
+	{ name: 'Active Directory', level: 75, color: '#0078d4' },
+	{ name: 'Windows Server', level: 60, color: '#ff1111' },
+	{ name: 'Networking & VPN', level: 60, color: '#00f0ff' },
+	{ name: 'Cybersecurity', level: 60, color: '#ff6b00' },
+	{ name: 'Cloud (O365/Azure)', level: 60, color: '#00a1f1' },
+	{ name: 'Help Desk Mastery', level: 80, color: '#00ff88' }
 ];
 ---
 
@@ -31,10 +31,7 @@ const techIT = [
 					<div class="tech-header">
 						<h3 class="tech-name">{tech.name}</h3>
 					</div>
-					<div class="progress-bar">
-						<div class="progress-fill" style={`--progress: ${tech.level}%; --tech-color: ${tech.color}`}></div>
-					</div>
-					<div class="tech-glow"></div>
+
 				</div>
 			))}
 		</div>
