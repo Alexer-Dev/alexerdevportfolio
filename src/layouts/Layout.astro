@@ -12,9 +12,22 @@ import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 		<title>Developer Portfolio | Web & Gaming</title>
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<meta property="og:image" content="https://alexerdev.com/images/LOGO.png" />
 		<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+		<meta property="og:description" content="My Personal Portfolio in practice and learn in Astro." />
+		<meta property="og:title" content="Alexerdev Portfolio" />
+		<meta property="og:url" content="https://alexerdev.com" />
 	</head>
 	<body>
+		<script type="application/ld+json">
+		{
+		"@context": "https://schema.org",
+		"@type": "WebPage",
+		"name": "Alexerdev Portfolio",
+		"description": "Personal Portfolio",
+		"url": "alexerdev.com"
+		}
+		</script>
 		<div class="grid-background"></div>
 		<LanguageSwitcher />
 		<div class="logo-container">
