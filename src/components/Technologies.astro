@@ -132,6 +132,8 @@ const techIT = [
 	const gridIT = document.getElementById('grid-it');
 
 	function switchTechProfile() {
+		if (!gridDev || !gridIT) return;
+		
 		// Desvanecer actual
 		gridDev.style.opacity = '0';
 		gridIT.style.opacity = '0';
@@ -156,7 +158,9 @@ const techIT = [
 
 	// SINCRONIZACIÓN: 
 	// Importante: Este intervalo debe ser el mismo que el del Hero (6000ms)
-	setInterval(switchTechProfile, 6000);
+	if (gridDev && gridIT) {
+		setInterval(switchTechProfile, 6000);
+	}
 
 	// traducción
 	function updateTranslations() {
