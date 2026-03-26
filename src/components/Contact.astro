@@ -488,6 +488,8 @@
 	const terminalIT = document.getElementById('terminal-it');
 
 	function switchTerminal() {
+		if (!terminalDev || !terminalIT) return;
+		
 		if (currentTerminalProfile === 'dev') {
 			terminalDev.classList.remove('active');
 			terminalIT.classList.add('active');
